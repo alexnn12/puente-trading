@@ -30,7 +30,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center md:w-1/2 w-full mx-auto">
-              <Button className="w-full">Entrar</Button>
+              <Button className="w-full">Ingresar</Button>
             </div>
           </form>
         </CardContent>
