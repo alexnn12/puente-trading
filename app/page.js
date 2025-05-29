@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -34,8 +35,10 @@ export default function Home() {
           </form>
         </CardContent>
         <CardFooter className="flex justify-center md:w-1/2 w-full mx-auto border-t border-gray-200">
-        <Button variant={"outline"}>
+        <Button variant={"outline"} asChild> 
+            <Link href="/registro">
             Registrarse Ahora
+            </Link>
           </Button>
         </CardFooter>
       </Card>
