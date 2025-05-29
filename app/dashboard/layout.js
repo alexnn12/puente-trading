@@ -106,6 +106,11 @@ export default function DashboardLayout({ children }) {
                 {user && `Hola ${user.nombre}`}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+              <DropdownMenuItem>    
+                <Link href="/dashboard/perfil" legacyBehavior passHref> 
+                  Perfil
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={handleLogout}>
                 Cerrar Sesión
               </DropdownMenuItem>
