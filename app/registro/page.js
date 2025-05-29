@@ -120,7 +120,7 @@ export default function Registro() {
               <div className="text-center">
                 <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
                   <h3 className="font-semibold mb-2">¡Tu cuenta ha sido creada exitosamente!</h3>
-                  <p>El administrador se pondrá en contacto contigo cuando tu cuenta esté activada. Te notificaremos por email cuando puedas comenzar a usar la plataforma.</p>
+                  <p>El administrador se pondrá en contacto contigo cuando tu cuenta esté activada. </p>
                 </div>
                 <Button 
                   onClick={() => {
