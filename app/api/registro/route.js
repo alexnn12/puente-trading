@@ -51,7 +51,8 @@ export async function POST(request) {
       data: {
         nombre: nombre.trim(),
         email: email.toLowerCase(),
-        contrasena_hash
+        contrasena_hash,
+        activo: false
       },
       select: {
         id: true,

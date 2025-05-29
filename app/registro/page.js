@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Registro() {
   const [formData, setFormData] = useState({
@@ -133,6 +134,7 @@ export default function Registro() {
                 </Button>
               </div>
             </CardContent>
+            
           </Card>
         </main>
       </div>
@@ -218,6 +220,13 @@ export default function Registro() {
               </div>
             </form>
           </CardContent>
+        <CardFooter className="flex justify-center md:w-1/2 w-full mx-auto border-t border-gray-200">
+          <Button variant={"outline"} asChild> 
+            <Link href="/">
+              Volver al Inicio
+            </Link>
+          </Button>
+        </CardFooter> 
         </Card>
       </main>
     </div>
