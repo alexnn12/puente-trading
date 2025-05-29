@@ -28,12 +28,12 @@ export default function Home() {
 
             </div>
 
-            <div className="flex justify-center">
-              <Button >Entrar</Button>
+            <div className="flex justify-center md:w-1/2 w-full mx-auto">
+              <Button className="w-full">Entrar</Button>
             </div>
           </form>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex justify-center md:w-1/2 w-full mx-auto border-t border-gray-200">
         <Button variant={"outline"}>
             Registrarse Ahora
           </Button>
