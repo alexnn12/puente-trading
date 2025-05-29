@@ -15,6 +15,7 @@ export default function Registro() {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   // Validación frontend
   const validateForm = () => {
@@ -84,8 +85,7 @@ export default function Registro() {
 
       if (response.ok) {
         // Registro exitoso
-        alert('Registro exitoso! Ahora puedes iniciar sesión.');
-        // Redirigir al login o limpiar formulario
+        setIsFinished(true);
         setFormData({ nombre: "", email: "", password: "" });
       } else {
         // Error del servidor
@@ -102,6 +102,42 @@ export default function Registro() {
       setIsLoading(false);
     }
   };
+
+  if (isFinished) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+        <main className="flex-1 flex items-center justify-center p-4">
+          <Card className="w-full md:w-1/3">
+            <CardHeader>
+              <CardTitle>
+                <Image src="/puente.svg" alt="Puente" width={200} height={40} className="mx-auto pb-2" />
+              </CardTitle>
+              <CardDescription className="text-center">
+                ¡Registro exitoso!
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center">
+                <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                  <h3 className="font-semibold mb-2">¡Tu cuenta ha sido creada exitosamente!</h3>
+                  <p>El administrador se pondrá en contacto contigo cuando tu cuenta esté activada. Te notificaremos por email cuando puedas comenzar a usar la plataforma.</p>
+                </div>
+                <Button 
+                  onClick={() => {
+                    window.location.href = '/';
+                  }}
+                  variant="outline"
+                  className="w-full"
+                >
+                  Volver al inicio
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
