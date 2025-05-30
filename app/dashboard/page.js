@@ -14,6 +14,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
   } from "@/components/ui/navigation-menu"
+import { Grid3X3Icon, ListIcon } from 'lucide-react';
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
@@ -22,7 +23,7 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [favoritosState, setFavoritosState] = useState([]);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const { favoritos, setFavoritos, getFavoritos, addFavorito, deleteFavorito, isFavorito, clearFavoritos } = useFavoritosStore();
+  const { favoritos, setFavoritos, getFavoritos, addFavorito, deleteFavorito, isFavorito, clearFavoritos, tipoDeCard, setTipoDeCard } = useFavoritosStore();
   
 
   // Array de acciones a consultar
@@ -198,9 +199,31 @@ export default function Dashboard() {
             className="max-w-md"
           />
         </div>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label>Tipo de vista:</Label>
+            <div className="flex items-center gap-1 border rounded-md p-1">
+            <button 
+                onClick={() => setTipoDeCard('listado')}
+                className={`p-2 rounded transition-colors ${tipoDeCard === 'listado' ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                title="Vista de lista"
+              >
+                <ListIcon className="w-4 h-4" /> 
+              </button>
+              <button
+                onClick={() => setTipoDeCard('ficha')}
+                className={`p-2 rounded transition-colors ${tipoDeCard === 'ficha' ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                title="Vista de fichas"
+              >
+                <Grid3X3Icon className="w-4 h-4" />
+              </button>
+             
+            </div>
+          </div>
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className={`grid grid-cols-1 md:grid-cols-${tipoDeCard === 'listado' ? '1' : '2'} gap-2`}>
         {filteredStocks.length > 0 ? (
           filteredStocks.map((stock) => {
             const price = stockPrices[stock.symbol];

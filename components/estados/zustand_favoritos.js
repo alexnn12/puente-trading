@@ -2,12 +2,19 @@ import { create } from 'zustand';
 
 const useFavoritosStore = create((set, get) => ({
   favoritos: [],
+  tipoDeCard: 'listado', // 'ficha' o 'listado'
 
   // Establecer favoritos
   setFavoritos: (favoritos) => set({ favoritos }),
 
   // Obtener favoritos
   getFavoritos: () => get().favoritos,
+
+  // Establecer tipo de card
+  setTipoDeCard: (tipo) => set({ tipoDeCard: tipo }),
+
+  // Obtener tipo de card
+  getTipoDeCard: () => get().tipoDeCard,
 
   // Agregar favorito
   addFavorito: (simbolo) => {
@@ -30,4 +37,3 @@ const useFavoritosStore = create((set, get) => ({
 }));
 
 export default useFavoritosStore;
-
