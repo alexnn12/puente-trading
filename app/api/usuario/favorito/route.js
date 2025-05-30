@@ -18,18 +18,21 @@ export async function POST(request) {
     // Obtener token del header Authorization
     const authHeader = request.headers.get('authorization');
     console.log(authHeader);
-    if (!authHeader) {
+    /*
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return Response.json(
         { message: "Token de autorización requerido" },
         { status: 401 }
       );
     }
+      */
 
     const token = authHeader.substring(7);
     
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const usuario_id = decoded.userId;
+      console.log(usuario_id);
 
       // Insertar favorito en la base de datos
       const favorito = await prisma.favoritos.create({
