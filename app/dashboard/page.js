@@ -5,13 +5,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AccionCard from '@/components/acciones/acciones_card';
+import useFavoritosStore from '@/components/estados/zustand_favoritos';
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [favoritos, setFavoritos] = useState([]);
+  const [favoritosState, setFavoritosState] = useState([]);
+  const { favoritos, setFavoritos, getFavoritos, addFavorito, deleteFavorito, isFavorito, clearFavoritos } = useFavoritosStore();
+  
 
   // Array de acciones a consultar
   const stocks = [
@@ -101,7 +104,9 @@ export default function Dashboard() {
 
         if (response.ok) {
           const result = await response.json();
-          setFavoritos(result.data || []);
+          setFavoritosState(result.data || []);
+          setFavoritos(result.data.map(fav => fav.simbolo));
+
         }
       } catch (error) {
         console.error('Error fetching favoritos:', error);

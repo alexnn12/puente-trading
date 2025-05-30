@@ -2,10 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { HeartIcon } from 'lucide-react';
+import useFavoritosStore from '@/components/estados/zustand_favoritos';
 
 export default function AccionCard({ stock, price }) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { favoritos, addFavorito, deleteFavorito, isFavorito } = useFavoritosStore();
+  
+  const isFavorite = isFavorito(stock.symbol);
 
   // Función para obtener el token del localStorage
   const getToken = () => {
@@ -35,7 +38,7 @@ export default function AccionCard({ stock, price }) {
       });
 
       if (response.ok) {
-        setIsFavorite(true);
+        addFavorito(stock.symbol);
       } else {
         const error = await response.json();
         console.error('Error al agregar favorito:', error.message);
@@ -65,7 +68,7 @@ export default function AccionCard({ stock, price }) {
       });
 
       if (response.ok) {
-        setIsFavorite(false);
+        deleteFavorito(stock.symbol);
       } else {
         const error = await response.json();
         console.error('Error al quitar favorito:', error.message);
