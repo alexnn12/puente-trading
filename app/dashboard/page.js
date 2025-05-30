@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import AccionCard from '@/components/acciones/acciones_lista';
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
@@ -17,7 +18,7 @@ export default function Dashboard() {
       symbol: 'AAPL',
       name: 'Apple Inc.'
     },
- /*   {
+   {
       symbol: 'GOOGL',
       name: 'Alphabet Inc.'
     },
@@ -36,7 +37,7 @@ export default function Dashboard() {
     {
       symbol: 'META',
       name: 'Meta Platforms Inc.'
-    },*/
+    },
   ];
 
   // Filtrar acciones basado en el término de búsqueda
@@ -48,34 +49,33 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStockPrices = async () => {
       try {
-        const API_KEY = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY || 'demo';
         const promises = stocks.map(async (stock) => {
-            const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.symbol}&apikey=${API_KEY}`;
-            console.log(url);
-          const response = await fetch(
-            url,
-            {
-                next: { revalidate: 3000 }
-            }
-          );
+          let url = `/api/acciones?symbol=${stock.symbol}`;
+          console.log(url);
+          const response = await fetch(url);
           
           if (response.ok) {
-            const data = await response.json();
-            const quote = data['Global Quote'];
-            if (quote && quote['05. price']) {
+            const result = await response.json();
+            if (result.data && result.data.price) {
               return {
                 symbol: stock.symbol,
-                price: parseFloat(quote['05. price'])
+                price: result.data.price,
+                yesterdayChange: result.data.yesterdayChange,
+                weekChange: result.data.weekChange
               };
             }
           }
-          return { symbol: stock.symbol, price: null };
+          return { symbol: stock.symbol, price: null, yesterdayChange: null, weekChange: null };
         });
 
         const results = await Promise.all(promises);
         const pricesData = {};
         results.forEach(result => {
-          pricesData[result.symbol] = result.price;
+          pricesData[result.symbol] = {
+            price: result.price,
+            yesterdayChange: result.yesterdayChange,
+            weekChange: result.weekChange
+          };
         });
         
         setStockPrices(pricesData);
@@ -142,23 +142,11 @@ export default function Dashboard() {
             const price = stockPrices[stock.symbol];
             
             return (
-              <Card key={stock.symbol}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span>{stock.name}</span>
-                    <span className="text-sm font-normal text-gray-500">({stock.symbol})</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Precio actual de la acción de {stock.name.split(' ')[0]}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
-                    {price ? `$${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'No disponible'}
-                  </div>
-                  <p className="text-sm text-gray-500 mt-1">USD</p>
-                </CardContent>
-              </Card>
+              <AccionCard 
+                key={stock.symbol}
+                stock={stock}
+                price={price}
+              />
             );
           })
         ) : (
