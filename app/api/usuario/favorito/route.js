@@ -41,6 +41,7 @@ export async function POST(request) {
           simbolo
         }
       });
+      console.log(favorito);
 
       return Response.json(
         { 
