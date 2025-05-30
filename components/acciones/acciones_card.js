@@ -24,6 +24,7 @@ export default function AccionCard({ stock, price }) {
     }
 
     setIsLoading(true);
+    alert (token);
     try {
       const response = await fetch('/api/usuario/favorito', {
         method: 'POST',

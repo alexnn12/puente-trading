@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AccionCard from '@/components/acciones/acciones_lista';
+import AccionCard from '@/components/acciones/acciones_card';
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
@@ -142,7 +142,7 @@ export default function Dashboard() {
             const price = stockPrices[stock.symbol];
             
             return (
-              <AccionCard 
+              <AccionCard
                 key={stock.symbol}
                 stock={stock}
                 price={price}
