@@ -17,6 +17,7 @@ export async function POST(request) {
 
     // Obtener token del header Authorization
     const authHeader = request.headers.get('authorization');
+    console.log(authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return Response.json(
         { message: "Token de autorización requerido" },
