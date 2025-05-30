@@ -6,6 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AccionCard from '@/components/acciones/acciones_card';
 import useFavoritosStore from '@/components/estados/zustand_favoritos';
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+  } from "@/components/ui/navigation-menu"
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
@@ -13,6 +21,7 @@ export default function Dashboard() {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [favoritosState, setFavoritosState] = useState([]);
+  const [activeTab, setActiveTab] = useState('dashboard');
   const { favoritos, setFavoritos, getFavoritos, addFavorito, deleteFavorito, isFavorito, clearFavoritos } = useFavoritosStore();
   
 
@@ -44,11 +53,17 @@ export default function Dashboard() {
     },
   ];
 
-  // Filtrar acciones basado en el término de búsqueda
-  const filteredStocks = stocks.filter(stock => 
-    stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    stock.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtrar acciones basado en el término de búsqueda y la pestaña activa
+  const filteredStocks = stocks.filter(stock => {
+    const matchesSearch = stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         stock.name.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    if (activeTab === 'favoritos') {
+      return matchesSearch && favoritos.includes(stock.symbol);
+    }
+    
+    return matchesSearch;
+  });
 
   useEffect(() => {
     const fetchStockPrices = async () => {
@@ -145,8 +160,30 @@ export default function Dashboard() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-2">Mercado de acciones</h1>
         <p className="text-gray-600">Precios actuales de acciones</p>
+      </div>
+      <div className="space-y-4">
+      <NavigationMenu>
+            <NavigationMenuList>
+               <NavigationMenuItem>
+                  <NavigationMenuLink 
+                    className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 cursor-pointer ${activeTab === 'dashboard' ? 'bg-accent text-accent-foreground' : ''}`}
+                    onClick={() => setActiveTab('dashboard')}
+                  >
+                    Dashboard
+                  </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                  <NavigationMenuLink 
+                    className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 cursor-pointer ${activeTab === 'favoritos' ? 'bg-accent text-accent-foreground' : ''}`}
+                    onClick={() => setActiveTab('favoritos')}
+                  >
+                    Favoritos
+                  </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
       </div>
       
       <div className="space-y-4">
@@ -178,7 +215,12 @@ export default function Dashboard() {
           })
         ) : (
           <div className="col-span-full text-center py-8">
-            <p className="text-gray-500">No se encontraron acciones que coincidan con tu búsqueda.</p>
+            <p className="text-gray-500">
+              {activeTab === 'favoritos' 
+                ? 'No tienes acciones favoritas que coincidan con tu búsqueda.' 
+                : 'No se encontraron acciones que coincidan con tu búsqueda.'
+              }
+            </p>
           </div>
         )}
       </div>
