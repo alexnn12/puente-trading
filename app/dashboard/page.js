@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [favoritos, setFavoritos] = useState([]);
 
   // Array de acciones a consultar
   const stocks = [
@@ -87,7 +88,28 @@ export default function Dashboard() {
       }
     };
 
+    const fetchFavoritos = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const response = await fetch('/api/usuario/favorito', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setFavoritos(result.data || []);
+        }
+      } catch (error) {
+        console.error('Error fetching favoritos:', error);
+      }
+    };
+
     fetchStockPrices();
+    fetchFavoritos();
   }, []);
 
   if (isLoading) {
