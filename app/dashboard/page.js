@@ -17,7 +17,7 @@ export default function Dashboard() {
       symbol: 'AAPL',
       name: 'Apple Inc.'
     },
-    {
+ /*   {
       symbol: 'GOOGL',
       name: 'Alphabet Inc.'
     },
@@ -36,7 +36,7 @@ export default function Dashboard() {
     {
       symbol: 'META',
       name: 'Meta Platforms Inc.'
-    },
+    },*/
   ];
 
   // Filtrar acciones basado en el término de búsqueda
