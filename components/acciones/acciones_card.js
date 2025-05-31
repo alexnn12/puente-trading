@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { HeartIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
+import { ExpandIcon, EyeIcon, HeartIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import useFavoritosStore from '@/components/estados/zustand_favoritos';
+import { AccionesPopup } from './acciones_popup';
 
 export default function AccionCard({ stock, price,  }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -144,6 +145,13 @@ export default function AccionCard({ stock, price,  }) {
           
           <div className="ml-4">
             <button
+              
+              className="p-1 rounded-full hover:bg-gray-100 transition-colors mr-2"
+            >
+              <AccionesPopup stock={stock} price={price} />
+              
+            </button>
+            <button
               onClick={handleFavoriteClick}
               disabled={isLoading}
               className="p-1 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
@@ -167,15 +175,18 @@ export default function AccionCard({ stock, price,  }) {
             <span>{stock.name}</span>
             <span className="text-sm font-normal text-gray-500">({stock.symbol})</span>
           </div>
-          <button
-            onClick={handleFavoriteClick}
-            disabled={isLoading}
-            className="p-1 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
-          >
-            <HeartIcon 
-              className={`w-4 h-4 ${isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-500'} ${isLoading ? 'opacity-50' : ''}`} 
-            />
-          </button>
+          <div className="flex items-center gap-1">
+            <AccionesPopup stock={stock} price={price} />
+            <button
+              onClick={handleFavoriteClick}
+              disabled={isLoading}
+              className="p-1 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
+            >
+              <HeartIcon 
+                className={`w-4 h-4 ${isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-500'} ${isLoading ? 'opacity-50' : ''}`} 
+              />
+            </button>
+          </div>
         </CardTitle>
         <CardDescription>
           Precio actual de la acción de {stock.name.split(' ')[0]}

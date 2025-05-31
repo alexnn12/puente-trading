@@ -24,9 +24,9 @@ export async function GET(request) {
     }
     
     const data = await response.json();
-    console.log('API Response:', data);
+//    console.log('API Response:', data);
     const quote = data['Global Quote'];
-    console.log('Quote data:', quote);
+//    console.log('Quote data:', quote);
     
     if (quote && Object.keys(quote).length > 0) {
       const stockData = {

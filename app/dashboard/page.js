@@ -81,11 +81,16 @@ export default function Dashboard() {
                 symbol: stock.symbol,
                 price: result.data.price,
                 yesterdayChange: result.data.yesterdayChange,
-                weekChange: result.data.weekChange
+                weekChange: result.data.weekChange,
+                open: result.data.open,
+                high: result.data.high,
+                low: result.data.low,
+                volume: result.data.volume,
+                
               };
             }
           }
-          return { symbol: stock.symbol, price: null, yesterdayChange: null, weekChange: null };
+          return { symbol: stock.symbol, price: null, yesterdayChange: null, weekChange: null, open: null, high: null, low: null, volume: null };
         });
 
         const results = await Promise.all(promises);
@@ -94,7 +99,11 @@ export default function Dashboard() {
           pricesData[result.symbol] = {
             price: result.price,
             yesterdayChange: result.yesterdayChange,
-            weekChange: result.weekChange
+            weekChange: result.weekChange,
+            open: result.open,
+            high: result.high,
+            low: result.low,
+            volume: result.volume,
           };
         });
         
