@@ -52,7 +52,7 @@ export async function POST(request) {
         nombre: nombre.trim(),
         email: email.toLowerCase(),
         contrasena_hash,
-        activo: false
+        activo: 0
       },
       select: {
         id: true,
