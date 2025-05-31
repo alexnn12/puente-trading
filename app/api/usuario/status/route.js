@@ -4,8 +4,12 @@ import { PrismaClient } from '@/lib/generated/prisma';
 
 const prisma = new PrismaClient();
 
-export async function PATCH(request, { params }) {
+export async function PATCH(request) {
+    const { activo, userId } = await request.json();
+    console.log('userId:', userId);
+    console.log('activo:', activo);
   try {
+    
     // Verificar token de autorización
     const authHeader = request.headers.get('authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -34,23 +38,17 @@ export async function PATCH(request, { params }) {
       );
     }
 
-    // Obtener el ID del usuario de los parámetros de la URL
-    const userId = parseInt(params.id);
-    if (!userId || isNaN(userId)) {
+    
+    // Validar userId
+    if (!userId ) {
       return NextResponse.json(
         { message: 'ID de usuario inválido' },
         { status: 400 }
       );
     }
 
-    // Obtener el nuevo estado del cuerpo de la petición
-    const { activo } = await request.json();
-    if (typeof activo !== 'boolean') {
-      return NextResponse.json(
-        { message: 'El campo activo debe ser un valor booleano' },
-        { status: 400 }
-      );
-    }
+   
+
 
     // Verificar que el usuario existe
     const usuarioExistente = await prisma.usuarios.findUnique({

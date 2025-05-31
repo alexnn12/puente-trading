@@ -81,15 +81,19 @@ export default function UsuariosPage() {
   }, [user, router]);
 
   const toggleUserStatus = async (userId, currentStatus) => {
+  
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/usuario/status/${userId}`, {
+      const response = await fetch(`/api/usuario/status/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ activo: !currentStatus })
+        body: JSON.stringify({ 
+          activo: currentStatus === null ? 1 : (currentStatus ? 0 : 1),
+          userId: userId 
+        })
       });
 
       if (response.ok) {
