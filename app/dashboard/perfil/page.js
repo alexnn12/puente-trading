@@ -144,7 +144,7 @@ export default function PerfilPage() {
           {user?.rol === 'admin' && (
             <div className="pt-4 border-t">
               <h3 className="text-lg font-medium mb-3">Panel de Administración</h3>
-              <Link href="/dashboard/admin/usuarios">
+              <Link href="/dashboard/perfil/usuarios"> 
                 <Button variant="outline" className="w-full">
                   Administrar Usuarios
                 </Button>

@@ -102,7 +102,7 @@ export default function Home() {
       <main className="flex-1 flex items-center justify-center p-4">
       <Card className="w-full md:w-1/3">
         <CardHeader>
-          <CardTitle>            <Image src="/puente.svg" alt="Puente" width={200}  className="mx-auto pb-2" />
+          <CardTitle>            <Image src="/puente.svg" alt="Puente" width={200} height={40} className="mx-auto pb-2" />
           </CardTitle>
           <CardDescription className="text-center">
           Tu plataforma de trading para invertir y hacer crecer tu capital.
