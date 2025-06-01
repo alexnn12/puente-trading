@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aplicación de Seguimiento de Acciones
 
-## Getting Started
+Una aplicación web moderna desarrollada con Next.js que permite a los usuarios seguir y gestionar sus acciones favoritas del mercado bursátil en tiempo real.
 
-First, run the development server:
+## Descripción de la Solución
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Esta aplicación proporciona una plataforma completa para el seguimiento de acciones del mercado financiero, ofreciendo:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Dashboard Interactivo**: Visualización en tiempo real de precios de acciones populares (Apple, Google, Microsoft, Amazon, Tesla, Meta)
+- **Sistema de Favoritos Personalizado**: Los usuarios pueden guardar y gestionar sus acciones de interés
+- **Autenticación Segura**: Sistema completo de registro e inicio de sesión con JWT
+- **Base de Datos Robusta**: Almacenamiento persistente con PostgreSQL y Prisma ORM
+- **API de Datos Financieros**: Integración con Alpha Vantage para obtener datos de mercado actualizados
+- **Caché Inteligente**: Sistema de caché que actualiza datos cada 24 horas para optimizar consultas y costos de API
+- **Interfaz Responsiva**: Diseño moderno con componentes UI reutilizables
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Estructura de la API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+La aplicación cuenta con los siguientes endpoints:
 
-## Learn More
+### Autenticación
+- `POST /api/auth/login` - Inicio de sesión de usuarios
+- `POST /api/auth/register` - Registro de nuevos usuarios
 
-To learn more about Next.js, take a look at the following resources:
+### Acciones
+- `GET /api/acciones?symbol={SYMBOL}` - Obtiene datos de una acción específica
+  - Parámetros: `symbol` (requerido) - Símbolo de la acción (ej: AAPL, GOOGL)
+  - Respuesta: Precio actual, cambios diarios/semanales, volumen, apertura, máximo, mínimo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Favoritos
+- `GET /api/usuario/favorito` - Obtiene favoritos del usuario autenticado
+- `POST /api/usuario/favorito` - Agrega una acción a favoritos
+- `DELETE /api/usuario/favorito` - Elimina una acción de favoritos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Usuarios
+- `GET /api/usuario/` - Obtiene información del perfil del usuario autenticado
+- `GET /api/usuario/listado` - Obtiene listado de usuarios (solo administradores)
+- `PUT /api/usuario/status` - Actualiza estado de activación de usuarios (solo administradores)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Requisitos del Sistema
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Requisitos Mínimos
+- Node.js 18.0 o superior
+- npm 8.0 o superior (o yarn/pnpm equivalente)
+- PostgreSQL 12.0 o superior
+- Cuenta en Alpha Vantage (API gratuita disponible)
+
+### Variables de Entorno Requeridas
+- `DATABASE_URL` - URL de conexión a la base de datos PostgreSQL (formato: postgresql://usuario:contraseña@host:puerto/nombre_bd)
+- `JWT_SECRET` - Clave secreta para la generación y verificación de tokens JWT (mínimo 32 caracteres)
+- `NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY` - Clave de API de Alpha Vantage para obtener datos financieros en tiempo real
+
+
