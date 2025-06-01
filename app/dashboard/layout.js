@@ -122,13 +122,6 @@ export default function DashboardLayout({ children }) {
       <main className='container mx-auto px-8 py-4'>
         {children}
       </main>
-      <footer className="border-t bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="container mx-auto px-4 py-4 flex justify-center items-center">
-          <p className="text-xs text-gray-600">
-            Puente Trading Platform - {new Date().getFullYear()}
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
