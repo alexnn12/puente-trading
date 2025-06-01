@@ -30,3 +30,10 @@ model usuarios {
   activo          Int?
   favoritos       favoritos[]
 }
+
+model acciones {
+  simbolo           String    @id
+  global_quote      String?
+  time_series_daily String?
+  actualizado       DateTime? @db.Timestamp(6)
+}
