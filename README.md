@@ -7,7 +7,7 @@ Una aplicación web moderna desarrollada con Next.js que permite a los usuarios 
 ### Requisitos Mínimos
 - Node.js 18.0 o superior
 - npm 8.0 o superior (o yarn/pnpm equivalente)
-- PostgreSQL 12.0 o superior
+- PostgreSQL 12.0 o superior (la versión actual usa Neon.tech como proveedor de PostgreSQL)
 - Cuenta en Alpha Vantage (API gratuita disponible)
 
 ### Variables de Entorno Requeridas
