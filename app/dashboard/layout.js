@@ -83,7 +83,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b ">
+      <header className="border-b bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
           <NavigationMenu>
             <NavigationMenuList>
@@ -99,7 +99,7 @@ export default function DashboardLayout({ children }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>  
               <Avatar>
-                <AvatarFallback>{user?.nombre ? user.nombre.charAt(0).toUpperCase() : 'U'}</AvatarFallback>
+                <AvatarFallback className='bg-gray-50'>{user?.nombre ? user.nombre.charAt(0).toUpperCase() : 'U'}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent> 
