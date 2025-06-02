@@ -131,149 +131,68 @@ La aplicación cuenta con los siguientes endpoints:
 
 ### Arquitectura y Framework
 
-#### Next.js 14 con App Router
-**Decisión**: Utilizar Next.js 15 con el nuevo App Router en lugar de Pages Router
-**Ventajas contra React puro**:
-- Server-Side Rendering (SSR) y Static Site Generation (SSG) integrados
-- Optimización automática de imágenes y fuentes
-- Code splitting automático y lazy loading
-- Routing basado en sistema de archivos
-- API Routes integradas para backend
-- Mejor SEO y rendimiento inicial comparado con SPAs de React
-- Hot reloading y Fast Refresh mejorados
-- Optimizaciones de producción automáticas
-
-**Trade-offs**:
-- Mayor complejidad comparado con React vanilla
-- Vendor lock-in con Vercel (aunque funciona en otros proveedores)
-- Curva de aprendizaje adicional sobre conceptos específicos de Next.js
-- Bundle size mayor debido a funcionalidades adicionales del framework
+#### Next.js 15 con App Router
+**Decisión**: Utilizar Next.js 15 con App Router
+**Ventajas**: SSR/SSG integrado, optimización automática, code splitting, routing basado en archivos, API Routes, mejor SEO
+**Trade-offs**: Mayor complejidad, vendor lock-in con Vercel, curva de aprendizaje, bundle size mayor
 
 #### Prisma como ORM
-**Decisión**: Usar Prisma en lugar de consultas SQL directas o ORMs alternativos
-**Ventajas**:
-- Type safety completo con TypeScript
-- Migraciones automáticas y versionado de esquema
-- Excelente developer experience con Prisma Studio
-- Generación automática de tipos
-
-**Trade-offs**:
-- Overhead adicional en consultas complejas
-- Tamaño del bundle ligeramente mayor
-- Dependencia de herramientas de generación de código
+**Decisión**: Usar Prisma como ORM principal
+**Ventajas**: Type safety con TypeScript, migraciones automáticas, excelente DX, generación de tipos
+**Trade-offs**: Overhead en consultas complejas, bundle size mayor, dependencia de generación de código
 
 ### Despliegue y Contenedorización
 
 #### Docker para Despliegue
-**Decisión**: Incluir Dockerfile para facilitar el despliegue en contenedores
-**Ventajas**:
-- Consistencia entre entornos de desarrollo y producción
-- Facilita el despliegue en servicios cloud y orquestadores
-- Aislamiento de dependencias y configuración
-- Escalabilidad horizontal simplificada
-
-**Trade-offs**:
-- Overhead adicional en recursos del sistema
-- Complejidad adicional en el proceso de build
-- Curva de aprendizaje para equipos sin experiencia en Docker
+**Decisión**: Incluir Dockerfile para contenedorización
+**Ventajas**: Consistencia entre entornos, facilita despliegue cloud, aislamiento, escalabilidad
+**Trade-offs**: Overhead de recursos, complejidad adicional, curva de aprendizaje
 
 ### Autenticación y Seguridad
 
 #### JWT con localStorage
-**Decisión**: Almacenar tokens JWT en localStorage en lugar de cookies httpOnly
-**Ventajas**:
-- Simplicidad en la implementación del cliente
-- Funciona bien con SPAs y APIs REST
-- Control total sobre el ciclo de vida del token
+**Decisión**: Almacenar tokens JWT en localStorage
+**Ventajas**: Simplicidad de implementación, funciona bien con SPAs, control total del token
+**Trade-offs**: Vulnerable a XSS, no se envía automáticamente, manejo manual de expiración
 
-**Trade-offs**:
-- Vulnerable a ataques XSS
-- No se envía automáticamente en requests
-- Requiere manejo manual de expiración
-
-#### Validación en Cliente y Servidor
-**Decisión**: Implementar validación tanto en frontend como backend
-**Ventajas**:
-- Mejor UX con feedback inmediato
-- Seguridad robusta con validación del servidor
-- Reducción de requests innecesarios
-
-**Trade-offs**:
-- Duplicación de lógica de validación
-- Mayor complejidad de mantenimiento
-- Posible inconsistencia entre validaciones
+#### Validación Dual (Cliente y Servidor)
+**Decisión**: Validación en frontend y backend
+**Ventajas**: Mejor UX, seguridad robusta, menos requests innecesarios
+**Trade-offs**: Duplicación de lógica, mayor complejidad, posible inconsistencia
 
 ### Base de Datos y APIs Externas
 
 #### Alpha Vantage API
-**Decisión**: Usar Alpha Vantage como fuente de datos financieros
-**Ventajas**:
-- API gratuita con límites razonables
-- Datos históricos y en tiempo real
-- Documentación completa y estable
+**Decisión**: Usar Alpha Vantage para datos financieros
+**Ventajas**: API gratuita, datos históricos y tiempo real, documentación estable
+**Trade-offs**: Límite de 25 requests/día, latencia variable, dependencia externa
 
-**Trade-offs**:
-- Límite de 25 requests por día en plan gratuito
-- Latencia variable dependiendo de la carga
-- Dependencia de servicio externo
-
-#### Caché en Memoria vs Base de Datos
-**Decisión**: No implementar caché persistente para datos de acciones
-**Ventajas**:
-- Simplicidad en la implementación
-- Datos siempre actualizados
-- Menos complejidad en invalidación de caché
-
-**Trade-offs**:
-- Mayor latencia en requests repetidos
-- Consumo innecesario de límites de API
-- Experiencia de usuario más lenta
+#### Sin Caché Persistente
+**Decisión**: No implementar caché para datos de acciones
+**Ventajas**: Simplicidad, datos actualizados, menos complejidad
+**Trade-offs**: Mayor latencia, consumo de límites API, UX más lenta
 
 ### Frontend y UI
 
 #### Tailwind CSS + shadcn/ui
-**Decisión**: Combinar Tailwind CSS con componentes de shadcn/ui
-**Ventajas**:
-- Desarrollo rápido con utilidades predefinidas
-- Componentes accesibles y bien diseñados
-- Consistencia visual automática
-- Bundle size optimizado con purging
+**Decisión**: Combinar Tailwind con componentes shadcn/ui
+**Ventajas**: Desarrollo rápido, componentes accesibles, consistencia visual, bundle optimizado
 
 ### Rendimiento y Optimización
 
 #### Client-Side Rendering para Dashboard
-**Decisión**: Usar CSR para el dashboard en lugar de SSR
-**Ventajas**:
-- Interactividad inmediata después de la carga inicial
-- Mejor experiencia para datos que cambian frecuentemente
-- Simplicidad en el manejo de autenticación
-
-**Trade-offs**:
-- Tiempo de carga inicial más lento
-- SEO limitado para contenido del dashboard
-- Dependencia de JavaScript para funcionalidad
+**Decisión**: CSR para el dashboard
+**Ventajas**: Interactividad inmediata, mejor para datos dinámicos, simplicidad en auth
+**Trade-offs**: Carga inicial lenta, SEO limitado, dependencia de JavaScript
 
 ### Escalabilidad y Mantenimiento
 
-#### Estructura de Carpetas por Funcionalidad
-**Decisión**: Organizar código por páginas/rutas en lugar de por tipo de archivo
-**Ventajas**:
-- Mejor organización para equipos grandes
-- Facilita la localización de código relacionado
-- Preparado para micro-frontends futuros
+#### Estructura por Funcionalidad
+**Decisión**: Organizar código por páginas/rutas
+**Ventajas**: Mejor organización, localización fácil, preparado para micro-frontends
+**Trade-offs**: Posible duplicación, menos reutilización
 
-**Trade-offs**:
-- Posible duplicación de componentes similares
-- Menos reutilización de código entre módulos
-
-#### Manejo de Errores Centralizado
-**Decisión**: Implementar manejo de errores a nivel de componente
-**Ventajas**:
-- Control granular sobre diferentes tipos de errores
-- Mejor UX con mensajes contextuales
-- Facilita el debugging
-
-**Trade-offs**:
-- Código repetitivo en manejo de errores
-- Posible inconsistencia en mensajes de error
-- Mayor complejidad en testing
+#### Manejo de Errores por Componente
+**Decisión**: Errores a nivel de componente
+**Ventajas**: Control granular, mejor UX, facilita debugging
+**Trade-offs**: Código repetitivo, posible inconsistencia, mayor complejidad en testing
