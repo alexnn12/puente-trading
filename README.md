@@ -9,12 +9,19 @@ Una aplicación web moderna desarrollada con Next.js que permite a los usuarios 
 - npm 8.0 o superior (o yarn/pnpm equivalente)
 - PostgreSQL 12.0 o superior (la versión actual usa Neon.tech como proveedor de PostgreSQL)
 - Cuenta en Alpha Vantage (API gratuita disponible)
+- Docker (opcional, para despliegue con contenedores)
 
 ### Variables de Entorno Requeridas
 - `DATABASE_URL` - URL de conexión a la base de datos PostgreSQL (formato: postgresql://usuario:contraseña@host:puerto/nombre_bd)
 - `JWT_SECRET` - Clave secreta para la generación y verificación de tokens JWT (mínimo 32 caracteres)
 - `NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY` - Clave de API de Alpha Vantage para obtener datos financieros en tiempo real
 
+### Despliegue con Docker
+La aplicación incluye un Dockerfile para facilitar el despliegue en contenedores:
+- Imagen base: Node.js 18 Alpine
+- Puerto expuesto: 3000
+- Optimizado para producción con dependencias mínimas
+- Generación automática de Prisma client incluida
 
 ## Descripción de la Solución
 
@@ -155,6 +162,21 @@ La aplicación cuenta con los siguientes endpoints:
 - Tamaño del bundle ligeramente mayor
 - Dependencia de herramientas de generación de código
 
+### Despliegue y Contenedorización
+
+#### Docker para Despliegue
+**Decisión**: Incluir Dockerfile para facilitar el despliegue en contenedores
+**Ventajas**:
+- Consistencia entre entornos de desarrollo y producción
+- Facilita el despliegue en servicios cloud y orquestadores
+- Aislamiento de dependencias y configuración
+- Escalabilidad horizontal simplificada
+
+**Trade-offs**:
+- Overhead adicional en recursos del sistema
+- Complejidad adicional en el proceso de build
+- Curva de aprendizaje para equipos sin experiencia en Docker
+
 ### Autenticación y Seguridad
 
 #### JWT con localStorage
@@ -231,7 +253,6 @@ La aplicación cuenta con los siguientes endpoints:
 - SEO limitado para contenido del dashboard
 - Dependencia de JavaScript para funcionalidad
 
-
 ### Escalabilidad y Mantenimiento
 
 #### Estructura de Carpetas por Funcionalidad
@@ -256,4 +277,3 @@ La aplicación cuenta con los siguientes endpoints:
 - Código repetitivo en manejo de errores
 - Posible inconsistencia en mensajes de error
 - Mayor complejidad en testing
-
