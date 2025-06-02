@@ -223,7 +223,6 @@ export default function Dashboard() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Label>Tipo de vista:</Label>
             <div className="flex items-center gap-1 border rounded-md p-1">
             <button 
                 onClick={() => setTipoDeCard('listado')}
