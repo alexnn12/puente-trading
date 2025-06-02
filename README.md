@@ -107,6 +107,9 @@ Esta aplicación proporciona una plataforma completa para el seguimiento de acci
 ### Especificación OpenAPI (Swagger)
 La aplicación incluye una especificación completa de la API en formato OpenAPI 3.0 disponible en el archivo `swagger.json`. 
 
+### Colección de Postman
+También se incluye una colección completa de Postman (`Puente API.postman_collection.json`) con todos los endpoints documentados y ejemplos de uso. Esta colección incluye:
+
 ### Estructura de la API
 
 La aplicación cuenta con los siguientes endpoints:
