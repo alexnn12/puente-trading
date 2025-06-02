@@ -138,30 +138,31 @@ La aplicación cuenta con los siguientes endpoints:
 ### Arquitectura y Framework
 
 #### Next.js 15 con App Router
-**Decisión**: Utilizar Next.js 15 con App Router
-**Ventajas**: SSR/SSG integrado, optimización automática, code splitting, routing basado en archivos, API Routes, mejor SEO
-**Trade-offs**: Mayor complejidad, vendor lock-in con Vercel, curva de aprendizaje, bundle size mayor
+- **Decisión**: Utilizar Next.js 15 con App Router
+- **Ventajas**: SSR/SSG integrado, optimización automática, code splitting, routing basado en archivos, API Routes, mejor SEO
+- **Trade-offs**: Mayor complejidad, vendor lock-in con Vercel, curva de aprendizaje, bundle size mayor
 
 #### Prisma como ORM
-**Decisión**: Usar Prisma como ORM principal
-**Ventajas**: Type safety con TypeScript, migraciones automáticas, excelente DX, generación de tipos
-**Trade-offs**: Overhead en consultas complejas, bundle size mayor, dependencia de generación de código
+- **Decisión**: Usar Prisma como ORM principal
+- **Ventajas**: Type safety con TypeScript, migraciones automáticas, excelente DX, generación de tipos
+- **Trade-offs**: Overhead en consultas complejas, bundle size mayor, dependencia de generación de código
 
 #### Validación Dual (Cliente y Servidor)
-**Decisión**: Validación en frontend y backend
-**Ventajas**: Mejor UX, seguridad robusta, menos requests innecesarios
-**Trade-offs**: Duplicación de lógica, mayor complejidad, posible inconsistencia
+- **Decisión**: Validación en frontend y backend
+- **Ventajas**: Mejor UX, seguridad robusta, menos requests innecesarios
+- **Trade-offs**: Duplicación de lógica, mayor complejidad, posible inconsistencia
 
 #### Tailwind CSS + shadcn/ui
-**Decisión**: Combinar Tailwind con componentes shadcn/ui
-**Ventajas**: Desarrollo rápido, componentes accesibles, consistencia visual, bundle optimizado
+- **Decisión**: Combinar Tailwind con componentes shadcn/ui
+- **Ventajas**: Desarrollo rápido, componentes accesibles, consistencia visual, bundle optimizado
+- **Trade-offs**: Curva de aprendizaje, dependencia de utilidades, posible verbosidad en HTML
 
 #### Client-Side Rendering para Dashboard
-**Decisión**: CSR para el dashboard
-**Ventajas**: Interactividad inmediata, mejor para datos dinámicos, simplicidad en auth
-**Trade-offs**: Carga inicial lenta, SEO limitado, dependencia de JavaScript
+- **Decisión**: CSR para el dashboard
+- **Ventajas**: Interactividad inmediata, mejor para datos dinámicos, simplicidad en auth
+- **Trade-offs**: Carga inicial lenta, SEO limitado, dependencia de JavaScript
 
 #### Estructura por Funcionalidad
-**Decisión**: Organizar código por páginas/rutas
-**Ventajas**: Mejor organización, localización fácil, preparado para micro-frontends
-**Trade-offs**: Posible duplicación, menos reutilización
+- **Decisión**: Organizar código por páginas/rutas
+- **Ventajas**: Mejor organización, localización fácil, preparado para micro-frontends
+- **Trade-offs**: Posible duplicación, menos reutilización
