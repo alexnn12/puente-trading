@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
 import AccionCard from '@/components/acciones/acciones_card';
 import useFavoritosStore from '@/components/estados/zustand_favoritos';
 import {
@@ -14,7 +15,8 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
   } from "@/components/ui/navigation-menu"
-import { Grid3X3Icon, ListIcon } from 'lucide-react';
+import { Grid3X3Icon, ListIcon, RefreshCwIcon } from 'lucide-react';
+import { Toaster } from '@/components/ui/sonner';
 
 export default function Dashboard() {
   const [stockPrices, setStockPrices] = useState({});
@@ -65,56 +67,57 @@ export default function Dashboard() {
     
     return matchesSearch;
   });
+  const fetchStockPrices = async () => {
+    try {
+      const promises = stocks.map(async (stock) => {
+        let url = `/api/acciones?symbol=${stock.symbol}`;
+        console.log(url);
+        const response = await fetch(url);
+        
+        if (response.ok) {
+          const result = await response.json();
+          if (result.data && result.data.price) {
+            return {
+              symbol: stock.symbol,
+              price: result.data.price,
+              yesterdayChange: result.data.yesterdayChange,
+              weekChange: result.data.weekChange,
+              open: result.data.open,
+              high: result.data.high,
+              low: result.data.low,
+              volume: result.data.volume,
+              
+            };
+          }
+        }
+        return { symbol: stock.symbol, price: null, yesterdayChange: null, weekChange: null, open: null, high: null, low: null, volume: null };
+      });
+
+      const results = await Promise.all(promises);
+      const pricesData = {};
+      results.forEach(result => {
+        pricesData[result.symbol] = {
+          price: result.price,
+          yesterdayChange: result.yesterdayChange,
+          weekChange: result.weekChange,
+          open: result.open,
+          high: result.high,
+          low: result.low,
+          volume: result.volume,
+        };
+      });
+      
+      setStockPrices(pricesData);
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Error de conexión. Intenta nuevamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchStockPrices = async () => {
-      try {
-        const promises = stocks.map(async (stock) => {
-          let url = `/api/acciones?symbol=${stock.symbol}`;
-          console.log(url);
-          const response = await fetch(url);
-          
-          if (response.ok) {
-            const result = await response.json();
-            if (result.data && result.data.price) {
-              return {
-                symbol: stock.symbol,
-                price: result.data.price,
-                yesterdayChange: result.data.yesterdayChange,
-                weekChange: result.data.weekChange,
-                open: result.data.open,
-                high: result.data.high,
-                low: result.data.low,
-                volume: result.data.volume,
-                
-              };
-            }
-          }
-          return { symbol: stock.symbol, price: null, yesterdayChange: null, weekChange: null, open: null, high: null, low: null, volume: null };
-        });
-
-        const results = await Promise.all(promises);
-        const pricesData = {};
-        results.forEach(result => {
-          pricesData[result.symbol] = {
-            price: result.price,
-            yesterdayChange: result.yesterdayChange,
-            weekChange: result.weekChange,
-            open: result.open,
-            high: result.high,
-            low: result.low,
-            volume: result.volume,
-          };
-        });
-        
-        setStockPrices(pricesData);
-      } catch (error) {
-        console.error('Error:', error);
-        setError('Error de conexión. Intenta nuevamente.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    
 
     const fetchFavoritos = async () => {
       try {
@@ -228,8 +231,24 @@ export default function Dashboard() {
               </button>
              
             </div>
-          </div>
+            <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              fetchStockPrices();
+              setSearchTerm('');
+              toast('Datos actualizados correctamente');
+
+            }}
+            className="p-2 rounded border hover:bg-accent hover:text-accent-foreground transition-colors"
+            title="Recargar datos"
+          >
+            <RefreshCwIcon className="w-4 h-4" /> 
+          </button>
         </div>
+          </div>
+          
+        </div>
+        
       </div>
       
       <div className={`grid grid-cols-1 md:grid-cols-${tipoDeCard === 'listado' ? '1' : '2'} gap-2`}>
@@ -256,6 +275,7 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
