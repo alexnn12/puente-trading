@@ -147,11 +147,6 @@ La aplicación cuenta con los siguientes endpoints:
 - **Ventajas**: Type safety con TypeScript, migraciones automáticas, excelente DX, generación de tipos
 - **Trade-offs**: Overhead en consultas complejas, bundle size mayor, dependencia de generación de código
 
-#### Validación Dual (Cliente y Servidor)
-- **Decisión**: Validación en frontend y backend
-- **Ventajas**: Mejor UX, seguridad robusta, menos requests innecesarios
-- **Trade-offs**: Duplicación de lógica, mayor complejidad, posible inconsistencia
-
 #### Tailwind CSS + shadcn/ui
 - **Decisión**: Combinar Tailwind con componentes shadcn/ui
 - **Ventajas**: Desarrollo rápido, componentes accesibles, consistencia visual, bundle optimizado
