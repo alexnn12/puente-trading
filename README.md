@@ -102,9 +102,12 @@ Esta aplicación proporciona una plataforma completa para el seguimiento de acci
 - **Contraseñas Seguras**: Usa contraseñas fuertes y únicas
 - **Tokens de Sesión**: Los tokens expiran automáticamente por seguridad
 
+## Documentación de la API
 
+### Especificación OpenAPI (Swagger)
+La aplicación incluye una especificación completa de la API en formato OpenAPI 3.0 disponible en el archivo `swagger.json`. 
 
-## Estructura de la API
+### Estructura de la API
 
 La aplicación cuenta con los siguientes endpoints:
 
@@ -141,58 +144,21 @@ La aplicación cuenta con los siguientes endpoints:
 **Ventajas**: Type safety con TypeScript, migraciones automáticas, excelente DX, generación de tipos
 **Trade-offs**: Overhead en consultas complejas, bundle size mayor, dependencia de generación de código
 
-### Despliegue y Contenedorización
-
-#### Docker para Despliegue
-**Decisión**: Incluir Dockerfile para contenedorización
-**Ventajas**: Consistencia entre entornos, facilita despliegue cloud, aislamiento, escalabilidad
-**Trade-offs**: Overhead de recursos, complejidad adicional, curva de aprendizaje
-
-### Autenticación y Seguridad
-
-#### JWT con localStorage
-**Decisión**: Almacenar tokens JWT en localStorage
-**Ventajas**: Simplicidad de implementación, funciona bien con SPAs, control total del token
-**Trade-offs**: Vulnerable a XSS, no se envía automáticamente, manejo manual de expiración
-
 #### Validación Dual (Cliente y Servidor)
 **Decisión**: Validación en frontend y backend
 **Ventajas**: Mejor UX, seguridad robusta, menos requests innecesarios
 **Trade-offs**: Duplicación de lógica, mayor complejidad, posible inconsistencia
 
-### Base de Datos y APIs Externas
-
-#### Alpha Vantage API
-**Decisión**: Usar Alpha Vantage para datos financieros
-**Ventajas**: API gratuita, datos históricos y tiempo real, documentación estable
-**Trade-offs**: Límite de 25 requests/día, latencia variable, dependencia externa
-
-#### Sin Caché Persistente
-**Decisión**: No implementar caché para datos de acciones
-**Ventajas**: Simplicidad, datos actualizados, menos complejidad
-**Trade-offs**: Mayor latencia, consumo de límites API, UX más lenta
-
-### Frontend y UI
-
 #### Tailwind CSS + shadcn/ui
 **Decisión**: Combinar Tailwind con componentes shadcn/ui
 **Ventajas**: Desarrollo rápido, componentes accesibles, consistencia visual, bundle optimizado
-
-### Rendimiento y Optimización
 
 #### Client-Side Rendering para Dashboard
 **Decisión**: CSR para el dashboard
 **Ventajas**: Interactividad inmediata, mejor para datos dinámicos, simplicidad en auth
 **Trade-offs**: Carga inicial lenta, SEO limitado, dependencia de JavaScript
 
-### Escalabilidad y Mantenimiento
-
 #### Estructura por Funcionalidad
 **Decisión**: Organizar código por páginas/rutas
 **Ventajas**: Mejor organización, localización fácil, preparado para micro-frontends
 **Trade-offs**: Posible duplicación, menos reutilización
-
-#### Manejo de Errores por Componente
-**Decisión**: Errores a nivel de componente
-**Ventajas**: Control granular, mejor UX, facilita debugging
-**Trade-offs**: Código repetitivo, posible inconsistencia, mayor complejidad en testing
