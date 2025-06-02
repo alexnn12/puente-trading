@@ -145,6 +145,16 @@ export default function Dashboard() {
     fetchFavoritos();
   }, []);
 
+  // Auto-refresh data every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchStockPrices();
+      toast('Datos actualizados automáticamente');
+    }, 300000); // 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
