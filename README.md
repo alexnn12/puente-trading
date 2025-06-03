@@ -35,72 +35,16 @@ Esta aplicación proporciona una plataforma completa para el seguimiento de acci
 - **Caché Inteligente**: Sistema de caché que actualiza datos cada 24 horas para optimizar consultas y costos de API
 - **Interfaz Responsiva**: Diseño moderno con componentes UI reutilizables
 
-## Guía de Uso Básico
+## Video Demostrativo
 
-### 1. Registro e Inicio de Sesión
+Puedes ver una demostración completa de la aplicación en funcionamiento en el siguiente video:
 
-#### Crear una Cuenta Nueva
-1. Navega a la página de registro
-2. Completa el formulario con:
-   - Nombre completo
-   - Dirección de email válida
-   - Contraseña segura
-3. Haz clic en "Registrarse"
-4. Serás redirigido automáticamente al dashboard
+[![Video Demostrativo - Aplicación de Seguimiento de Acciones](https://img.youtube.com/vi/qWm0qpsqLaE/0.jpg)](https://www.youtube.com/watch?v=qWm0qpsqLaE)
 
-#### Iniciar Sesión
-1. Ve a la página de login
-2. Ingresa tu email y contraseña
-3. Haz clic en "Iniciar Sesión"
-4. Accederás al dashboard principal
+**[Ver Video en YouTube](https://www.youtube.com/watch?v=qWm0qpsqLaE)**
 
-### 2. Navegación del Dashboard
 
-#### Vista Principal
-- **Panel de Acciones**: Visualiza las 6 acciones más populares (AAPL, GOOGL, MSFT, AMZN, TSLA, META)
-- **Información en Tiempo Real**: Precios actuales, cambios porcentuales y variaciones en dólares
-- **Indicadores Visuales**: Colores verde/rojo para identificar ganancias/pérdidas rápidamente
 
-#### Gestión de Favoritos
-- **Agregar a Favoritos**: Haz clic en el ícono de estrella junto a cualquier acción
-- **Ver Favoritos**: Accede a la sección "Mis Favoritos" en el menú lateral
-- **Eliminar Favoritos**: Haz clic nuevamente en la estrella para quitar de favoritos
-
-### 3. Perfil de Usuario
-
-#### Acceder al Perfil
-1. Haz clic en tu nombre en la barra superior
-2. Selecciona "Perfil" del menú desplegable
-
-#### Información Disponible
-- **Datos Personales**: Nombre y email
-- **Estado de Cuenta**: Activa/Inactiva
-- **Rol**: Usuario o Administrador
-- **Fecha de Registro**: Cuándo te uniste a la plataforma
-
-### 4. Funciones de Administrador
-
-#### Panel de Administración (Solo Administradores)
-- **Gestión de Usuarios**: Ver lista completa de usuarios registrados
-- **Control de Estado**: Activar/desactivar cuentas de usuario
-- **Información Detallada**: Ver roles y fechas de registro de todos los usuarios
-
-#### Acceder al Panel de Admin
-1. Ve a tu perfil
-2. Haz clic en "Administrar Usuarios" (solo visible para administradores)
-3. Gestiona usuarios desde la tabla interactiva
-
-### 5. Consejos de Uso
-
-#### Optimización de la Experiencia
-- **Actualización Automática**: Los datos se actualizan cada 24 horas automáticamente
-- **Favoritos Personalizados**: Usa la función de favoritos para acceso rápido a tus acciones de interés
-- **Navegación Móvil**: La aplicación es completamente responsiva para uso en dispositivos móviles
-
-#### Seguridad
-- **Cierre de Sesión**: Siempre cierra sesión al terminar, especialmente en dispositivos compartidos
-- **Contraseñas Seguras**: Usa contraseñas fuertes y únicas
-- **Tokens de Sesión**: Los tokens expiran automáticamente por seguridad
 
 ## Documentación de la API
 
