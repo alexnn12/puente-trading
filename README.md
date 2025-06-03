@@ -77,7 +77,7 @@ La aplicación cuenta con los siguientes endpoints:
 - `GET /api/usuario/listado` - Obtiene listado de usuarios (solo administradores)
 - `PUT /api/usuario/status` - Actualiza estado de activación de usuarios (solo administradores)
 
-### Dependencias principales
+## Dependencias principales
 
 #### Frontend
 - **Next.js 15.3.2** - Framework React con App Router para SSR/SSG
