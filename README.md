@@ -28,12 +28,12 @@ La aplicación incluye un Dockerfile para facilitar el despliegue en contenedore
 Esta aplicación proporciona una plataforma completa para el seguimiento de acciones del mercado financiero, ofreciendo:
 
 - **Dashboard Interactivo**: Visualización en tiempo real de precios de acciones populares (Apple, Google, Microsoft, Amazon, Tesla, Meta)
-- **Sistema de Favoritos Personalizado**: Los usuarios pueden guardar y gestionar sus acciones de interés
-- **Autenticación Segura**: Sistema completo de registro e inicio de sesión con JWT
-- **Base de Datos Robusta**: Almacenamiento persistente con PostgreSQL y Prisma ORM
+- **Sistema de Favoritos**: Los usuarios pueden guardar y gestionar sus acciones de interés
+- **Autenticación**: Sistema completo de registro e inicio de sesión con JWT
+- **Base de Datos**: Almacenamiento persistente con PostgreSQL y Prisma ORM
 - **API de Datos Financieros**: Integración con Alpha Vantage para obtener datos de mercado actualizados
-- **Caché Inteligente**: Sistema de caché que actualiza datos cada 24 horas para optimizar consultas y costos de API
-- **Interfaz Responsiva**: Diseño moderno con componentes UI reutilizables
+- **Caché**: Sistema de caché que actualiza datos cada 24 horas para optimizar consultas y costos de API
+- **Interfaz Responsiva**: Diseño con componentes UI reutilizables
 
 ## Video Demostrativo
 
