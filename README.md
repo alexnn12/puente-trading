@@ -133,6 +133,34 @@ La aplicación cuenta con los siguientes endpoints:
 - `GET /api/usuario/listado` - Obtiene listado de usuarios (solo administradores)
 - `PUT /api/usuario/status` - Actualiza estado de activación de usuarios (solo administradores)
 
+### Dependencias principales
+
+#### Frontend
+- **Next.js 15.3.2** - Framework React con App Router para SSR/SSG
+- **React 19.0.0** - Biblioteca principal para interfaces de usuario
+- **Tailwind CSS 4** - Framework CSS utility-first para estilos
+- **shadcn/ui** - Componentes UI accesibles basados en Radix UI
+- **Lucide React 0.511.0** - Iconos SVG optimizados
+- **Zustand 5.0.5** - Manejo de estado global ligero
+
+#### Backend y Base de Datos
+- **Prisma 6.8.2** - ORM moderno con type safety
+- **bcrypt 6.0.0** - Hash seguro de contraseñas
+- **jsonwebtoken 9.0.2** - Autenticación JWT
+
+#### Componentes UI (Radix UI)
+- **@radix-ui/react-avatar 1.1.10** - Componente avatar accesible
+- **@radix-ui/react-dialog 1.1.14** - Modales y diálogos
+- **@radix-ui/react-dropdown-menu 2.1.15** - Menús desplegables
+- **@radix-ui/react-label 2.1.7** - Etiquetas de formulario
+- **@radix-ui/react-navigation-menu 1.2.13** - Navegación principal
+- **@radix-ui/react-slot 1.2.3** - Composición de componentes
+- **Sonner 2.0.5** - Sistema de notificaciones toast
+
+#### Herramientas de Desarrollo
+- **Turbopack** - Bundler de desarrollo ultra-rápido
+- **PostCSS** - Procesador CSS para Tailwind
+
 ## Decisiones Técnicas y Trade-offs
 
 ### Arquitectura y Framework
